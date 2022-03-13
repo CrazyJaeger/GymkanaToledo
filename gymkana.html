@@ -13,8 +13,50 @@
 
 <body>
     <div class="page">
-        
+        <div id="time" class="header1"></div>
+        <div id="home" class="header2"></div>
+        <div id="login-form" class="form">
+            <div>
+                Nombre del grupo:
+            </div>
+            <input id="uname" type="text" />
+            <div>
+                Contraseña:
+            </div>
+            <input id="passwd" type="password" />
+            <div>
+                <button class="submit-btn" onclick="login()">Iniciar sesion</button>
+            </div>
+            <div id="msg" class="ko-text"></div>
+        </div>
+
+        <div id="task" class="task hidden">
+            <div id="task-head" class="header2">
+                Objetivo 1
+            </div>
+            <div id="task-body">
+                Busca el lugar donde las ranas crían pelo.
+            </div>
+            <div class="picture-submit">
+                <input type="file" id="image_input" accept="image/png, image/jpg">
+                <div id="display_image"></div>
+            </div>
+            <button class="submit-btn" onclick="submitImg()">Enviar</button>
+        </div>
+
+        <div class="button-grid">
+            <a class="button-link" onclick="navigateTo('marcador')" href="#">
+                <div class="grid-button leaderboard-button">
+                    Ir al Marcador
+                </div>
+            </a>
+        </div>
     </div>
 </body>
+<script defer>
+    setPageVisibility();
+    updateTimer();
+    setTimeout(loop, 60000);
+</script>
 
 </html>
