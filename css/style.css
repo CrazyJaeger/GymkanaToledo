@@ -68,6 +68,30 @@ a.button-link {
     margin: 2.5rem 2rem 2.5rem 2rem;
 }
 
+.form {
+    margin-left: 2rem;
+}
+
+.submit-btn{
+    margin-top: 1rem;
+    height: 2rem;
+    width: 7rem;
+    background-color: #2471A3;
+    color: white;
+}
+
+.msg-text{
+    font-size: 0.75rem;
+}
+
+.ko-text{
+    color: red;
+}
+
+.ok-text{
+    color: green;
+}
+
 @media (max-width: 1080px) {
     html {
         background: url(../img/catedral_toledo_narrow.jpg) no-repeat center center fixed;

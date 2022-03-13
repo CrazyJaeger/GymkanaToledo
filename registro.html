@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <script src="js/shared.js"></script>
     <script src="js/registro.js"></script>
 </head>
+
 <body>
     <div class="page">
         <div class="header1">
@@ -17,7 +19,24 @@
         <div class="header2">
             Rellena el formulario para registrarte en la Gymkana:
         </div>
-        <div class="form"></div>
+        <div class="form">
+            <div>
+                Nombre del grupo:
+            </div>
+            <input id="uname" type="text" />
+            <div>
+                Contraseña:
+            </div>
+            <input id="passwd" type="password" />
+            <div>
+                Repite la contraseña:
+            </div>
+            <input id="repeat" type="password" />
+            <div>
+                <button class="submit-btn" onclick="register()">Registrarse</button>
+            </div>
+            <div id="msg"></div>
+        </div>
         <div class="normal">
             <strong>¡ATENCIÓN!</strong><br />
             Al rellenar este formulario para participar en la Gymkana Toledana estarás aceptando implícitamente nuestra
@@ -27,4 +46,5 @@
         </div>
     </div>
 </body>
+
 </html>
