@@ -19,17 +19,17 @@
             Selecciona la página a la que deseas acceder
         </div>
         <div class="button-grid">
-            <a class="button-link" onclick="testAlert()" href="./registro.html">
+            <a class="button-link" onclick="navigateTo('registro')" href="#">
                 <div class="grid-button register-button">
                     Registrar un nuevo grupo
                 </div>
             </a>
-            <a class="button-link" onclick="testAlert()" href="./gymkana.html">
+            <a class="button-link" onclick="navigateTo('gymkana')" href="#">
                 <div class="grid-button access-button">
                     Acceder a la Gymkana
                 </div>
             </a>
-            <a class="button-link" onclick="testAlert()" href="./marcador.html">
+            <a class="button-link" onclick="navigateTo('marcador')" href="#">
                 <div class="grid-button leaderboard-button">
                     Ver el marcador
                 </div>
@@ -40,11 +40,14 @@
             Si estas accediendo como profesor/a, accede al siguiente enlace para validar el progeso de los concursantes:
         </div>
         <div class="button-grid">
-            <a class="button-link" onclick="testAlert()" href="./validar.html">
+            <a class="button-link" onclick="navigateTo('validar')" href="#">
                 <div class="grid-button validate-button">
                     Validar progreso
                 </div>
             </a>
+        </div>
+        <div class="normal">
+            <a onclick="navigateTo('privacy')" href="#">Política de privacidad</a>
         </div>
     </div>
 </body>

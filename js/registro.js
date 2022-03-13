@@ -1,3 +1,7 @@
-function helloWorld(){
-    console.log("Hello, WORLD!");
+function register(){
+
+}
+
+function generateToken(user, password){
+    
 }

@@ -2,7 +2,11 @@ html {
     background: url(../img/catedral_toledo_wide.jpg) no-repeat center center fixed;
     background-size: cover;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
+}
+
+.body{
+    overflow: auto;
 }
 
 .page {
@@ -57,6 +61,11 @@ a.button-link {
 
 .validate-button{
     background-color: indianred;
+}
+
+.normal{
+    font-size: 1rem;
+    margin: 2.5rem 2rem 2.5rem 2rem;
 }
 
 @media (max-width: 1080px) {
