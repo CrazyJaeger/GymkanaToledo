@@ -7,7 +7,6 @@ html {
 
 .page {
     margin: 5rem 5rem 5rem 5rem;
-    color: #333333;
     background-color: rgba(250, 250, 250, .5);
     padding-bottom: 5rem;
 }
@@ -37,12 +36,27 @@ a.button-link {
 }
 
 .grid-button {
-    background-color: red;
     margin-left: auto;
     margin-right: auto;
     width: 15rem;
     padding-top: 1.25rem;
     height: 2.5rem;
+}
+
+.register-button{
+    background-color: #2471A3;
+}
+
+.access-button{
+    background-color: #7D3C98;
+}
+
+.leaderboard-button{
+    background-color: #28B463;
+}
+
+.validate-button{
+    background-color: indianred;
 }
 
 @media (max-width: 1080px) {
