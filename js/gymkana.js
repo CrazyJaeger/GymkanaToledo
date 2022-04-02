@@ -1,3 +1,18 @@
+function checkLogin(){
+    const usr = sessionStorage.getItem("user");
+    if(usr == null){
+        location.replace("./login.html");
+    }else{
+        loadData();
+    }
+}
+
+function loadData(){
+    console.log("Howdy")
+}
+
+
+
 function loop() {
     let flag = updateTimer();
     if (flag) {
