@@ -6,7 +6,7 @@ html {
 }
 
 .page {
-    margin: 5rem 5rem 5rem 5rem;
+    margin: 2rem;
     background-color: rgba(250, 250, 250, .5);
     padding-bottom: 5rem;
     max-height: 90vh;
@@ -189,5 +189,14 @@ td.leaderboard-col, th.leaderboard-col{
         background-size: cover;
         height: 100%;
         overflow: hidden;
+    }
+
+    .display_image {
+        margin: 2rem auto 2rem auto;
+        width: 15rem;
+        height: 15rem;
+        border: 1px solid black;
+        background-position: center;
+        background-size: cover;
     }
 }
