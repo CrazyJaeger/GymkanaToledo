@@ -100,8 +100,9 @@ function postB64(b64){
     let acertijoid = document.getElementById("acertijoid").value;
     let grupo = sessionStorage.getItem("user");
     let post = {
-        "acertijo" : acertijoid,
+        "acertijo" : parseInt(acertijoid),
         "grupo" : grupo,
+        "instante" : new Date(),
         "imagen" : b64
     }
 

@@ -10,7 +10,11 @@ function login() {
     }).then(function (data) {
         if(data === password){
             sessionStorage.setItem("user", uname);
-            location.replace("./gymkana.html");
+            if(uname === "profe"){
+                location.replace("./validar.html");
+            }else{
+                location.replace("./gymkana.html");
+            } 
         }else{
             let err = document.getElementById("msg");
             err.innerHTML = "Usuario o contraseña incorrectos"
