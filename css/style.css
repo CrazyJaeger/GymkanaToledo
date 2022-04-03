@@ -146,6 +146,10 @@ td.leaderboard-col, th.leaderboard-col{
     background-size: cover;
  }
 
+ .pista{
+     color:#333333;
+ }
+
 @media (max-width: 1080px) {
     html {
         background: url(../img/catedral_toledo_narrow.jpg) no-repeat center center fixed;
