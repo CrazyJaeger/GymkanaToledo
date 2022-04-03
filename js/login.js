@@ -5,7 +5,7 @@ function login() {
     let password = document.getElementById("passwd").value;
     let uname = email.split("@")[0];
 
-    let pass = fetch(firebase + "passwds/" + uname + ".json").then(function (response) {
+    fetch(firebase + "passwds/" + uname + ".json").then(function (response) {
         return response.json();
     }).then(function (data) {
         if(data === password){

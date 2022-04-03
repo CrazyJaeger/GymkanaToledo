@@ -1,33 +1,23 @@
-function getGroups() {
-    // TODO
-    // Conectar con la base de datos para obtener los grupos
+const firebase = "https://gymkanatoledo-default-rtdb.europe-west1.firebasedatabase.app/";
 
-    // TODO: stub!
-    let groups = [
-        {
-            nombre: "Grupo 1",
-            puntos: "5",
-            tiempo: 1643672470000
-        }, {
-            nombre: "Grupo 2",
-            puntos: "3",
-            tiempo: 1643671446000
-        }, {
-            nombre: "Grupo 3",
-            puntos: "5",
-            tiempo: 1643672366000
-        }, {
-            nombre: "Grupo 4",
-            puntos: "0",
-            tiempo: 1643670000000
-        }, {
-            nombre: "Grupo 5",
-            puntos: "1",
-            tiempo: 1643671152000
+function fetchGroups(){
+    fetch(firebase + "marcador.json").then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        let groups = [];
+        for(let id in data){
+            groups.push(formatGroup(id, data[id]))
         }
-    ];
+        orderGroups(groups);
+    });
+}
 
-    orderGroups(groups);
+function formatGroup(id, group){
+    return {
+        nombre: id,
+        puntos: group.puntos,
+        tiempo: new Date(group.tiempo)
+    }
 }
 
 function orderGroups(groups) {
@@ -44,28 +34,21 @@ function orderGroups(groups) {
     createTable(groups)
 }
 
-function getStartingTime() {
-    // TODO
-    // Pedir a la base de datos el momento en el que empezo la prueba
-
-    // TODO: stub!
-    return 1643670000000;
-}
-
 function formatTime(diff) {
+    let hours = diff.getHours();
     let mins = diff.getMinutes();
     let secs = diff.getSeconds();
+    if(hours < 10)
+        hours = "0" + hours;
     if (mins < 10)
         mins = "0" + mins;
     if (secs < 10)
         secs = "0" + secs;
 
-    return mins + ":" + secs;
+    return hours + ":" + mins + ":" + secs;
 }
 
 function createTable(orderedGroups) {
-    let startTime = getStartingTime();
-
     // Creamos la tabla
     let tbody = document.getElementById("leaderboard-body");
     for (let i = 0; i < orderedGroups.length; i++) {
@@ -96,8 +79,7 @@ function createTable(orderedGroups) {
         puntos.innerHTML = orderedGroups[i].puntos;
         let tiempo = document.createElement("td");
         tiempo.classList.add("leaderboard-col");
-        let diff = orderedGroups[i].tiempo - startTime;
-        tiempo.innerHTML = formatTime(new Date(diff));
+        tiempo.innerHTML = formatTime(orderedGroups[i].tiempo);
 
         // Annadimos los elementos
         tr.appendChild(puesto);
@@ -107,11 +89,4 @@ function createTable(orderedGroups) {
         tbody.appendChild(tr);
     }
 
-}
-
-function loop(){
-    let flag = updateTimer();
-    if(flag){
-        setTimeout(loop, 1000);
-    }
 }

@@ -138,47 +138,5 @@ function postB64(b64) {
     }).then(res => {
         console.log("Request complete! response:", res);
         alert("Imagen enviada. Espera un poco y refresca la pagina. Si te aparecen letras rojas has fallado. Si la dan por buena pasareis a la siguiente prueba");
-        // waitLoop();
     });
 }
-
-// function waitLoop(){
-//     console.log("ping!")
-//     let flag = checkState();
-//     if(flag){
-//         setTimeout(waitLoop, 30000);
-//     }
-// }
-
-// function checkState(){
-//     let usr = sessionStorage.getItem("user");
-//     fetch(firebase + "grupos/" + usr + "/estado.json").then(function (response) {
-//         return response.json();
-//     }).then(function (data) {
-//         let estado = data;
-//         if(estado === "fallo"){
-//             location.replace("./gymkana.html");
-//         }else if(estado === "pass"){
-//             let acertijoid = document.getElementById("acertijoid").value;
-//             let body = {
-//                 acertijoactual: acertijoid + 1,
-//                 estado: "ok"
-//             }
-//             fetch(firebase + "grupos/" + grupo + ".json", {
-//                 method: "PUT",
-//                 headers: {'Content-Type': 'application/json'},
-//                 body: JSON.stringify(body)
-//             }).then(res => {
-//                 location.replace("./gymkana.html");
-//             });
-//         }
-//         return true;
-//     });
-// }
-
-// // function loop() {
-// //     let flag = updateTimer();
-// //     if (flag) {
-// //         setTimeout(loop, 60000);
-// //     }
-// // }
