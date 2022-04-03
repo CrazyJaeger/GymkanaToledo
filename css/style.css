@@ -160,8 +160,17 @@ td.leaderboard-col, th.leaderboard-col{
     background-size: cover;
  }
 
+ .puzzle_image{
+    margin: 2rem auto 2rem auto;
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+ }
+
  .pista{
-     color:#333333;
+     color:indianred;
  }
 
  .validaciones{

@@ -10,19 +10,38 @@ function checkLogin() {
 }
 
 function fetchState(user) {
-    let estado;
     fetch(firebase + "grupos/" + user + "/acertijoactual.json").then(function (response) {
         return response.json();
     }).then(function (data) {
         let acertijoactual = data;
+
+        if(parseInt(acertijoactual) == 8){
+            alert("¡ENHORABUENA! ¡HAS TERMINADO! Quédate en el Alcazar hasta que finalice la actividad")
+            return;
+        }
+
         document.getElementById("acertijoid").setAttribute("value", acertijoactual);
 
         fetch(firebase + "grupos/" + user + "/estado.json").then(function (response) {
             return response.json();
         }).then(function (data) {
             let estado = data;
+            if (estado != "pass") {
+                fetchPuzzle(acertijoactual, estado);
+            } else {
+                let body = {
+                    acertijoactual: parseInt(acertijoactual) + 1,
+                    estado: "ok"
+                }
+                fetch(firebase + "grupos/" + user + ".json", {
+                    method: "PUT",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                }).then(res => {
+                    location.replace("./gymkana.html");
+                });
+            }
 
-            fetchPuzzle(acertijoactual, estado);
         });
     });
 }
@@ -34,7 +53,7 @@ function fetchPuzzle(acertijoactual, estado) {
         let puzzle = data;
         if (estado === "ok") {
             loadPuzzle(puzzle, null);
-        } else {
+        } else if (estado === "fallo") {
             fetch(firebase + "pistas/" + acertijoactual + ".json").then(function (response) {
                 return response.json();
             }).then(function (data) {
@@ -53,20 +72,26 @@ function loadPuzzle(puzzle, pista) {
     let pistatxt = document.getElementById("pista");
 
     acertijo.innerHTML = puzzle.acertijo;
-    for (var text of puzzle.texto) {
-        let b = document.createElement("b");
-        let br = document.createElement("br");
-        let p = document.createElement("p");
-        b.innerHTML = text.titulo;
-        p.innerHTML = text.cuerpo;
-        texto.appendChild(b);
-        texto.appendChild(br);
-        texto.appendChild(p);
+    if(puzzle.texto != null){
+        for (var text of puzzle.texto) {
+            let b = document.createElement("b");
+            let br = document.createElement("br");
+            let p = document.createElement("p");
+            b.innerHTML = text.titulo;
+            p.innerHTML = text.cuerpo;
+            texto.appendChild(b);
+            texto.appendChild(br);
+            texto.appendChild(p);
+        }
     }
-
-    for (var img in puzzle.imagenes) {
-        // TODO!
-        debugger;
+    
+    if(puzzle.imagenes != null){
+        for (var img of puzzle.imagenes) {
+            let div = document.createElement("div");
+            div.classList.add("puzzle_image");
+            div.style.backgroundImage = `url(${img})`;
+            imagenes.appendChild(div);
+        }
     }
 
     if (pista != null) {
@@ -90,36 +115,70 @@ function submitImg() {
     let div = document.getElementById("display_image");
     let styles = window.getComputedStyle(div);
     let image = styles.backgroundImage;
-    if(image != "none"){
+    if (image != "none") {
         let b64 = image.slice(5, -2);
         postB64(b64);
     }
 }
 
-function postB64(b64){
+function postB64(b64) {
     let acertijoid = document.getElementById("acertijoid").value;
     let grupo = sessionStorage.getItem("user");
     let post = {
-        "acertijo" : parseInt(acertijoid),
-        "grupo" : grupo,
-        "instante" : new Date(),
-        "imagen" : b64
+        "acertijo": parseInt(acertijoid),
+        "grupo": grupo,
+        "instante": new Date(),
+        "imagen": b64
     }
 
     fetch(firebase + "posts.json", {
         method: "POST",
-        headers: {'Content-Type': 'application/json'}, 
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(post)
-      }).then(res => {
+    }).then(res => {
         console.log("Request complete! response:", res);
-        alert("Imagen enviada. En breves sabremos si hemos acertado ;)")
-        // TODO: loop, wait for teacher to answer
-      });
+        alert("Imagen enviada. Espera un poco y refresca la pagina. Si te aparecen letras rojas has fallado. Si la dan por buena pasareis a la siguiente prueba");
+        // waitLoop();
+    });
 }
 
-// function loop() {
-//     let flag = updateTimer();
-//     if (flag) {
-//         setTimeout(loop, 60000);
+// function waitLoop(){
+//     console.log("ping!")
+//     let flag = checkState();
+//     if(flag){
+//         setTimeout(waitLoop, 30000);
 //     }
 // }
+
+// function checkState(){
+//     let usr = sessionStorage.getItem("user");
+//     fetch(firebase + "grupos/" + usr + "/estado.json").then(function (response) {
+//         return response.json();
+//     }).then(function (data) {
+//         let estado = data;
+//         if(estado === "fallo"){
+//             location.replace("./gymkana.html");
+//         }else if(estado === "pass"){
+//             let acertijoid = document.getElementById("acertijoid").value;
+//             let body = {
+//                 acertijoactual: acertijoid + 1,
+//                 estado: "ok"
+//             }
+//             fetch(firebase + "grupos/" + grupo + ".json", {
+//                 method: "PUT",
+//                 headers: {'Content-Type': 'application/json'},
+//                 body: JSON.stringify(body)
+//             }).then(res => {
+//                 location.replace("./gymkana.html");
+//             });
+//         }
+//         return true;
+//     });
+// }
+
+// // function loop() {
+// //     let flag = updateTimer();
+// //     if (flag) {
+// //         setTimeout(loop, 60000);
+// //     }
+// // }
