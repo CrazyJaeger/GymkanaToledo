@@ -1,5 +1,10 @@
-const firebase = "https://gymkanatoledo-default-rtdb.europe-west1.firebasedatabase.app/";
+const firebase = "<FIREBASE REAL-TIME DATABASE ROOT URL>";
 
+/**
+ * Checks if the user is logged in AND that the user corresponds to the
+ * teacher role.
+ * The user will be redirected to the login page if criteria are not met.
+ */
 function checkLogin(){
     const usr = sessionStorage.getItem("user");
     if (usr !== "profe") {
@@ -9,6 +14,9 @@ function checkLogin(){
     }
 }
 
+/**
+ * Retrieves all latest posts from the the group participants.
+ */
 function fetchValidaciones(){
     fetch(firebase + "posts.json").then(function (response) {
         return response.json();
@@ -23,6 +31,12 @@ function fetchValidaciones(){
     });
 }
 
+/**
+ * Prints the submissions on screen for the teacher to validate them.
+ * 
+ * @param {object[]} posts list of post objects with the submited picture, group name and puzzle id
+ * @param {string[]} soluciones string array with the puzzle solutions
+ */
 function loadPosts(posts, soluciones){
     let section = document.getElementById("seccion-validaciones");
     for(var postid in posts){
@@ -71,6 +85,13 @@ function loadPosts(posts, soluciones){
     }
 }
 
+/**
+ * Sets the group state to "pass" or "fallo", depending on wether the submission is valid or not.
+ * Either way, the submission is deleted from the database.
+ * 
+ * @param {string} postid randomly generated id that identifies the submission
+ * @param {boolean} valid validity of the submission
+ */
 function validatePost(postid, valid){
     let div = document.getElementById(postid);
     let grupo = div.getElementsByTagName("b").item(0).getAttribute("value");
