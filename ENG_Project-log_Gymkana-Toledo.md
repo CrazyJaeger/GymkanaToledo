@@ -20,4 +20,33 @@ This project had a small planning phase with my friend Kaela, who explained her 
 
 Shortly after this conversation, I started working on a crude prototype for this web application. This phase was very slow as I was working with technology that was new to me, in particular, *GitHub's* website publishing. I was also going through a very big transition in my work-life, so I couldn't spend as much time on this project as I would have liked. This situation only got worse when Kaela was informed that she was not going to be able to go to Toledo the day the *Gymkana* was taking place. She sent me the quizzes, clues and solutions during this time, so I could include them in the database whenever I had one.
 
-I eneded up doing a "programming marathon", finishing most of the project in a single night about a weekend before the event took place.
+I eneded up doing a "programming marathon", finishing most of the project in a single night about a weekend before the event took place. The final result is what we see here. There were multiple aspects that had to be changed in order to speed up the completion time of the project, specially in regards to accounts and security, due to the time limitation and the lack of time to explore other safer storage solutions.
+
+I ended up deciding on using *Google Firebase* realtime-database, as it was faster in comparison to the latest bersion of the *Firebase* database, although also not as safe. When it came down to security, I ended up deciding to do the following:
+
+* Instead of allowing the users to create an account, I created a series of predefined accounts for each group and another account for the teachers invigillating the event.
+* The database, actually stored as a JSON object, would be accessible via the HTTP REST service calls offered by *Firebase*.
+* Most of the security would be handled by the frontend, saving a user token in the browser's *session storage*.
+
+When a user trues to access a screen, the frontend checks if the user has a token and asks them to log in if they don't. Once logged in, the token is saved in the *session storage* so the user can freely move from screen to screen. Student tokens grant access to the student-accessible screens and teacher tokens grant access to the teacher-accessible screens. The only publicly accessible screens would be the frontpage and the leaderboard (as well as the log in page, of course).
+
+All screens were created within the specifications and, considering that the database was quite vulnerable as it was easily accessible through REST without many more firewalls, it was decided to save the images using *b64*, as to not be directly visible by just looking at the, and I promised to delete the images less than 24 hours after the completion of the event as these are considered to be personal data under the GPDR of the EU.
+
+## Conceptual overview of the project
+In this section, we discuss the conceptual target behind the different screens. This overview defines the motives and reasons behind the existance of each screen, drawing an abstraction from more technical aspects of said screens, which we will see later on in the following section. We'll go step by step through the screens in the order the user is expected to see them.
+
+### Frontpage
+
+### Login page
+
+### Gymkana page
+
+### Validation page
+
+### Leaderboard page
+
+## Technical overview of the project
+
+## Project conclusion
+
+## Lessons learned
